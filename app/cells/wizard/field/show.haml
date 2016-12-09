@@ -1,6 +1,9 @@
 = context[:form].fields_for 'field_items', field_item do |field_item_form|
   - if field_item.field.field_type_instance.class == TextFieldType
     - if render_method
+      %a.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored#displayImage{ style: 'padding:0;box-shadow:none;float:none;display:block;width:100%;'}
+        %span{style:'margin-right: 10px;'} Display Image
+        %i.material-icons wallpaper
       = cell(Plugins::Core::TextCell, field_item, form: field_item_form, input_options: input, label_options: label).(render_method)
     - else
       = cell(Plugins::Core::TextCell, field_item, form: field_item_form, input_options: input, label_options: label).(:input)

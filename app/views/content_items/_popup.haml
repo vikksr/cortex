@@ -1,0 +1,46 @@
+%dialog.mdl-dialog#mediaImages{ style: 'width: 60%;margin: 0;top: 150px;right: 6%;left: auto;padding: 5px;overflow: hidden;box-sizing: border-box;' }
+  .mdl-dialog__content#displayOptions{ style: 'padding: 0px;' }
+    %div#featuredMedia{style: 'display:block'}
+      %p{style: 'display:block'}
+        %strong Featured Media
+      %div.tr-dw{style: 'display:inline-block;position:relative;margin:0;width:24%;vertical-align: top;'}
+        %div{style: 'text-align:center;line-height:70px;font-size:20px;vertical-align:middle;'} No Image Set
+      %div.tr-dw{style: 'display:inline-block;position:relative;margin:0;width:50%;vertical-align: top;'}
+      %div.tr-dw{style: 'display:inline-block;position:relative;margin:0;width:24%;vertical-align: top;'}
+        %a.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored{'data-action': 'SETFEATURED', style: 'display:block;width:60%;padding-left: 6px;box-shadow: none;'}
+          %i.material-icons search
+          %span{style: 'margin-right: 10px;'} Browse
+        %a.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.rmm{'data-action': 'removeFeatured', style: 'display:none;width:60%;background:red;padding-left: 6px;box-shadow: none;'}
+          %i.material-icons delete
+          %span{style: 'margin-right: 10px;'} Remove
+    %div#tileMedia{style: 'display:block'}
+      %p{style: 'display:block'}
+        %strong Tile Media
+      %div.tr-dw{style: 'display:inline-block;position:relative;margin:0;width:24%;vertical-align: top;'}
+        %div{style: 'text-align:center;line-height:70px;font-size:20px;vertical-align:middle;'} No Image Set
+      %div.tr-dw{style: 'display:inline-block;position:relative;margin:0;width:50%;vertical-align: top;'}
+      %div.tr-dw{style: 'display:inline-block;position:relative;margin:0;width:24%;vertical-align: top;'}
+        %a.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored{'data-action': 'SETTILE', style: 'display:block;padding-left: 6px;box-shadow: none;width:60%;'}
+          %i.material-icons search
+          %span{style: 'margin-right: 10px;'} Browse
+        %a.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.rmm{'data-action': 'removeTile', style: 'display:none;background:red;width:60%;padding-left: 6px;box-shadow: none;'}
+          %i.material-icons delete
+          %span{style: 'margin-right: 10px;'} Remove
+  .mdl-dialog__content#mediaList{ style: 'padding: 0px;' }
+    %h3#popupHeading{style: 'border-bottom: 1px solid #EEE;line-height: 20px;font-size: 18px;margin:0;color: #777;padding: 10px 0;'} Insert Media from Media Library
+    .mdl-list
+    - media_items.each do |item|
+      -asset_data = item.field_items[0].data['asset']
+      .mdl-list__item{'data-id': item[:id] ,'data-pub': item[:is_published] ,'data-url': asset_data['url'] ,'data-size': asset_data['file_size'], 'data-update': item[:updated_at], style: 'border-bottom: 1px solid #EEE;padding:4px 16px;'}
+        %span.mdl-list__item-primary-content
+          %span{style: 'display:inline-block;width:108px;'}
+            %img{height: 60, src: asset_data['style_urls']['mini']}
+          %div{style: 'display:inline-block;padding:0px 15px;'}
+            %strong{style: 'display:block'}
+              = item.field_items[1].data['text']
+        %div.mdl-list__item-secondary-action
+          %a.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored{'data-id': item[:id], style: 'padding-right: 6px;box-shadow: none;'}
+            %span{style: 'margin-right: 10px;'} add
+            %i.material-icons add_circle_outline
+  .mdl-dialog__actions.mdl-dialog__actions
+    .mdl-button.mdl-js-button.mdl-button--raised.close CLOSE

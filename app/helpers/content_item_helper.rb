@@ -16,7 +16,7 @@ module ContentItemHelper
   end
 
   def field_items_attributes_params
-    field_items_attributes_as_array = params["content_item"]["field_items_attributes"].map do |key, value|
+    field_items_attributes_as_array = params["content_item"]["field_items_attributes"].map do |_key, value|
       value
     end
 
@@ -37,6 +37,10 @@ module ContentItemHelper
     end
 
     sanitize_parameters(permitted_keys)
+  end
+
+  def media_items
+    ContentType.find_by_name('Media').content_items.select {|item| !!(/^image/ =~  item.field_items[0].data['asset']['content_type'])}
   end
 
   def permit_param(param)
