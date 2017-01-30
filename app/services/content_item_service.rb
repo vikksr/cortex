@@ -45,10 +45,14 @@ class ContentItemService < ApplicationService
   def transact_and_refresh
     ActiveRecord::Base.transaction do
       yield
-      parse_field_items!
-      @content_item.save!
-      execute_state_change(@content_item)
-      update_search!
+      #binding.pry
+        @content_item.save!
+        parse_field_items!
+        @content_item.save
+        execute_state_change(@content_item)
+        update_search!
+      #end
+      #@content_item
     end
   end
 

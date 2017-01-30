@@ -40,12 +40,28 @@ class ContentItemsController < AdminController
   end
 
   def create
-    if content_item.create
+  #  cnt_item = content_item.create
+  #  binding.pry
+    begin
+      @content_item = content_item.create
+    rescue Exception => e
+      flash[:warning] = "ContentItem failed to create! Reason: #{e.message}"
+      @content_type = content_type
+      @content_item = content_type.content_items.new(content_item_params)
+      @content_item = ContentItem.new
+      params[:content_item]["field_items_attributes"].to_hash.each do |key, value|
+        value.delete("id")
+        @content_item.field_items << FieldItem.new(value)
+      end
+
+      content_item_params.delete("field_items_attributes")
+      @content_item.attributes = params[:content_item].to_hash
+      #binding.pry
+      @wizard = WizardDecoratorService.new(content_item: @content_item)
+      render action: :new
+    else
       flash[:success] = "ContentItem created"
       redirect_to content_type_content_items_path
-    else
-      flash[:warning] = "ContentItem failed to create! Reason: #{@content_item.errors.full_messages}"
-      render :new
     end
   end
 end

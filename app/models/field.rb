@@ -19,6 +19,11 @@ class Field < ApplicationRecord
     field_type_instance(field_name: name).mapping
   end
 
+  def flash_error(type, mess)
+    flash[type] = mess
+    binding.pry
+  end
+
   private
 
   def acceptable_field_type
