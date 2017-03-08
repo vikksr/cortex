@@ -49,7 +49,7 @@ class ContentItemsController < AdminController
 
       render :new
     else
-     flash[:success] = 'ContentItem created'
+     flash[:success] = "Hooray - #{content_type.name} created!"
      redirect_to content_type_content_items_path
    end
   end
