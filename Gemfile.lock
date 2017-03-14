@@ -7,8 +7,8 @@ GIT
 
 GIT
   remote: https://github.com/cortex-cms/cortex-plugins-core.git
-  revision: 1498e6e2dfd581124c5db87b5c1596d761b601ba
-  branch: develop
+  revision: 3a99531309aaca21e370c52cb837a342ec0a1307
+  branch: bugfix/COR-667-Media-Assets-Not-Updating
   specs:
     cortex-plugins-core (0.11.0)
       cells (~> 4.1)
