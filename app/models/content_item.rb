@@ -62,7 +62,7 @@ class ContentItem < ApplicationRecord
 
   def rss_date(date_field_id)
     date = field_items.find_by_field_id(date_field_id).data["timestamp"]
-    Date.parse(date).rfc2822
+    Date.parse(date).rfc2822 unless date.nil?
   end
 
   def rss_author(field_id)
