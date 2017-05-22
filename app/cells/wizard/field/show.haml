@@ -1,5 +1,6 @@
 = context[:form].fields_for 'field_items', field_item do |field_item_form|
   - if field_item.field.field_type_instance.class == TextFieldType
+    - binding.pry
     - if render_method
       = cell(Plugins::Core::TextCell, field_item, form: field_item_form, input_options: input, label_options: label, tooltip: tooltip).(render_method)
     - else
